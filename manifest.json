@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "id": "zm.column-width",
+  "name": "Column Width",
+  "version": "1.0.0",
+  "author": "Omarchy",
+  "description": "Choose a scrolling-layout column width for the focused window.",
+  "kinds": ["bar-widget"],
+  "entryPoints": { "barWidget": "ColumnWidth.qml" },
+  "barWidget": {
+    "displayName": "Column Width",
+    "description": "Set a focused window to a narrow, normal, wide, full-width, or fullscreen size.",
+    "category": "Window management",
+    "allowMultiple": false,
+    "defaultSection": "right"
+  }
+}
