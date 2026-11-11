@@ -1,17 +1,24 @@
 {
   "schemaVersion": 1,
-  "id": "zm.column-width",
-  "name": "Column Width",
+  "id": "zm.column-control",
+  "name": "Column Control",
   "version": "1.0.0",
   "author": "Omarchy",
-  "description": "Choose a scrolling-layout column width for the focused window.",
-  "kinds": ["bar-widget"],
-  "entryPoints": { "barWidget": "ColumnWidth.qml" },
+  "description": "Choose a scrolling-layout column width and configure hot-corner actions.",
+  "kinds": [
+    "service",
+    "bar-widget"
+  ],
+  "entryPoints": {
+    "service": "HotCorners.qml",
+    "barWidget": "ColumnControl.qml"
+  },
   "barWidget": {
-    "displayName": "Column Width",
-    "description": "Set a focused window to a narrow, normal, wide, full-width, or fullscreen size.",
+    "displayName": "Column Control",
+    "description": "Set a focused window width and configure screen hot corners.",
     "category": "Window management",
     "allowMultiple": false,
     "defaultSection": "right"
-  }
+  },
+  "keepLoaded": true
 }

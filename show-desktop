@@ -1,0 +1,21 @@
+#!/bin/bash
+# Toggle "show desktop": stash every window on the active workspace into a
+# hidden special workspace, or bring them back if they're already stashed.
+
+active_ws=$(hyprctl activeworkspace -j | jq -r '.id')
+stash="special:desktop-$active_ws"
+
+stashed=$(hyprctl clients -j | jq -r --arg ws "$stash" '.[] | select(.workspace.name == $ws) | .address')
+
+if [[ -n $stashed ]]; then
+  for addr in $stashed; do
+    hyprctl dispatch "hl.dsp.window.move({ workspace = \"$active_ws\", follow = false, window = \"address:$addr\" })" >/dev/null
+  done
+else
+  visible=$(hyprctl clients -j | jq -r --argjson ws "$active_ws" '.[] | select(.workspace.id == $ws) | .address')
+  [[ -z $visible ]] && exit 0
+  for addr in $visible; do
+    hyprctl dispatch "hl.dsp.window.move({ workspace = \"$stash\", follow = false, window = \"address:$addr\" })" >/dev/null
+  done
+fi
+
